@@ -1,0 +1,30 @@
+name: Docker Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  release:
+    if: github.repository == 'PasteUs/golang-alpine'
+    name: Run on ${{ matrix.os }} and push
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Publish Docker
+        uses: LucienShui/Publish-Docker-Github-Action@2.7.1
+        with:
+          name: registry.cn-hangzhou.aliyuncs.com/pasteus/golang-alpine
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: registry.cn-hangzhou.aliyuncs.com
+          dockerfile: Dockerfile
+          tag_names: true
