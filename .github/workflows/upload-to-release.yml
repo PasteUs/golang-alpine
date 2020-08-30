@@ -1,0 +1,32 @@
+name: Go Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  release:
+    if: github.repository == 'PasteUs/golang-alphine'
+    name: Build on ${{ matrix.os }} and upload
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        go_version: [1.12]
+        os: [ubuntu-latest]
+
+    steps:
+
+      - name: Check out code into the directory
+        uses: actions/checkout@v1
+
+      - name: Publish Docker
+        uses: LucienShui/Publish-Docker-Github-Action@2.7.1
+        with:
+          name: registry.cn-hangzhou.aliyuncs.com/pasteus/golang-alpine
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: registry.cn-hangzhou.aliyuncs.com
+          dockerfile: Dockerfile
+          tag_names: true
