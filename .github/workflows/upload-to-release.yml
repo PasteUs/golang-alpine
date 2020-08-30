@@ -7,7 +7,7 @@ on:
 jobs:
 
   release:
-    if: github.repository == 'PasteUs/golang-alphine'
+    if: github.repository == 'PasteUs/golang-alpine'
     name: Build on ${{ matrix.os }} and upload
     runs-on: ${{ matrix.os }}
 
