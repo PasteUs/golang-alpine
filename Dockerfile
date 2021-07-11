@@ -1,4 +1,4 @@
-FROM golang:1.12-alpine
+FROM golang:1.16-alpine
 LABEL maintainer="Lucien Shui" \
       email="lucien@lucien.ink"
 RUN apk --no-cache add build-base

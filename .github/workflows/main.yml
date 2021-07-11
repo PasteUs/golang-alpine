@@ -14,7 +14,6 @@ jobs:
 
     strategy:
       matrix:
-        go_version: [1.12]
         os: [ubuntu-latest]
 
     steps:
@@ -47,7 +46,7 @@ jobs:
             linux/386
           push: true
           tags: |
-            pasteme/golang:1.12-alpine
+            pasteme/golang:1.16-alpine
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
